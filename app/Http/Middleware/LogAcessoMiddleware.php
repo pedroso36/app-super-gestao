@@ -16,11 +16,14 @@ class LogAcessoMiddleware
      */
     public function handle($request, Closure $next)
     {
-        //return $next($request);
-        //dd($request);
+
         $ip = $request->server->get('REMOTE_ADDR');
         $rota = $request->getRequestUri();
         LogAcesso::create(['log' =>  "O IP $ip requisitou a rota $rota"]);
-        return Response('Chamemos no middleware e finalizamos no proprio middleware !');
+
+        //return $next($request);
+        $resposta = $next($request);
+        $resposta->setStatusCode(201, 'Manipulando resposta com middlewares');
+        return $resposta;
     }
 }

@@ -19,21 +19,25 @@
     @foreach($motivo_contatos as $key => $motivo_contato)
     <option value="{{$motivo_contato->id}}" {{ old('motivo_contatos_id') == $motivo_contato->id ? 'selected' : '' }}>{{$motivo_contato->motivo_contato}}</option>
     @endforeach
-    <option value="1" {{ old('motivo_contato') == 1 ? 'selected' : ''}}>Dúvida</option>
+    {{-- <option value="1" {{ old('motivo_contato') == 1 ? 'selected' : ''}}>Dúvida</option>
     <option value="2" {{ old('motivo_contato') == 2 ? 'selected' : ''}}>Elogio</option>
-    <option value="3" {{ old('motivo_contato') == 3 ? 'selected' : ''}}>Reclamação</option>
+    <option value="3" {{ old('motivo_contato') == 3 ? 'selected' : ''}}>Reclamação</option> --}}
   </select>
+
   <br>
+
   <textarea name="mensagem" class="{{$classe}}">{{ (old('mensagem') != '') ? old ('mensagem') : 'Preencha aqui sua mensagem' }}</textarea>
   {{ $errors->has('mensagem') ? $errors->first('mensagem'): ''}}
   <br>
   <button type="submit" class="{{ $classe }}">ENVIAR</button>
 </form>
+
 @if($errors->any())
 <div style="position:absolute; top:0px; left:0px; width:100px; background:red">
   @foreach($errors->all() as $erro)
   {{ $erro }}
   <br>
   @endforeach
+
 </div>
 @endif

@@ -1,23 +1,38 @@
-<h3>Fornecedor</h3>
+@extends('app.layouts.basico')
+@section('titulo', 'Fornecedor')
 
-@php
-/*
-if( !Condição ) {} Se usa o if quando a condição for verdadeira
-*/
-@endphp
+@section('conteudo')
+<br><br><br><br> Fornecedor
 
-@isset($fornecedor)
-      @foreach($fornecedor as $indice => $fornecedor)
+<div class="conteudo-pagina">
 
-         fornecedor: {{ $fornecedor[$i] ['nome'] }}
-         <br>
-         Status: {{ $fornecedor[$i] ['status'] }}
-         <br>
-         CNPJ: {{ $fornecedor[$i] ['cnpj'] ?? 'Não informado.' }}
-         <br>
-         telefone: ({{ $fornecedor[$i] ['ddd'] ?? 'Não informado' }}) {{ $fornecedor[0] ['telefone'] ?? 'Não informado' }}
-         @endforeach
+  <div class="titulo-pagina-2">
+    <p>Fornecedor</p>
+  </div>
 
-@endisset
+  <div class="menu">
+    <ul>
+      <li><a href="{{ route('app.fornecedor.adicionar') }}">Novo</a></li>
+      <li><a href="">Consulta</a></li>
+      <li><a href="{{ route('app.fornecedor.listar') }}">Listar</a></li>
+    </ul>
 
-<br>
+  </div>
+
+  <div class="informacao-pagina">
+    <div style="width: 30%; margin-left: auto; margin-right: auto;">
+      <form method="post" action="{{ route('app.fornecedor.listar') }}">
+        @csrf
+        <input type="text" name="nome" placeholder="Nome" class="borda-preta">
+        <input type="text" name="site" placeholder="Site" class="borda-preta">
+        <input type="text" name="uf" placeholder="UF" class="borda-preta">
+        <input type="text" name="email" placeholder="E-mail" class="borda-preta">
+        <button type="submit" class="borda-preta">Pesquisar</button>
+      </form>
+    </div>
+  </div>
+
+
+</div>
+
+@endsection
